@@ -1,1 +1,11 @@
-<p>recipe-detail-component works!</p>
+<div class="detail-wrapper">
+    <div class="recipe-card" *ngIf="recipe">
+      <h3>{{recipe?.name}}</h3>
+      <img [src]="recipe?.images?.[0]" alt="{{recipe?.name}}" />
+      <p><strong>Cuisine:</strong> {{recipe?.cuisine}}</p>
+      <p><strong>Ingredients:</strong></p>
+      <ul><li *ngFor="let i of recipe.ingredients">{{i}}</li></ul>
+      <p><strong>Instructions:</strong></p>
+      <p>{{recipe?.instructions}}</p>
+    </div>
+</div>
