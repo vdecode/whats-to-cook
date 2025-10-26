@@ -8,33 +8,9 @@ import { Recipe } from '../models/recipe.model';
 })
 export class RecipeService {
   private readonly API = 'https://dummyjson.com/recipes';
-  private readonly PLACEHOLDER = 'https://via.placeholder.com/400x250?text=No+Image';
 
   constructor(private http: HttpClient) {}
 
-  private fixImageUrls(images: any[], fallback?: string): string[] {
-    if (!images || !Array.isArray(images) || !images.length) {
-      return [fallback || this.PLACEHOLDER];
-    }
-
-    return images.map((url: any) => {
-      if (typeof url !== 'string' || !url.trim()) {
-        return fallback || this.PLACEHOLDER;
-      }
-      // Force HTTPS if missing
-      if (!url.startsWith('http')) {
-        return `https://dummyjson.com/${url.replace(/^\/*/, '')}`;
-      }
-      // Replace invalid localhost or relative
-      if (url.includes('localhost') || url.includes('dummyjson')) {
-        return url.startsWith('https://') ? url : url.replace('http://', 'https://');
-      }
-      return url;
-    });
-  }
-
-  // 
-  
   fetchAll(): Observable<any> {
     return this.http.get<any>(this.API);
   }
@@ -49,7 +25,7 @@ export class RecipeService {
           ? r.ingredients
           : [String(r.ingredients || '')],
         instructions: r.instructions || r.steps || '',
-        images: this.fixImageUrls(r.images || [r.thumbnail], this.PLACEHOLDER),
+        images: r.images,
       }))
     );
   }

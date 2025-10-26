@@ -12,11 +12,16 @@ import { RecipeStore } from '../../stores/recipe.store';
 })
 export class FavoritesComponent {
 
-  favoriteRecipes$: Observable<Recipe[]>;
-  constructor(public store: RecipeStore){
-    this.favoriteRecipes$ = this.store.favorites$.pipe(
+  favoriteRecipes: Observable<Recipe[]>;
+
+  constructor(public store: RecipeStore) {
+
+    this.favoriteRecipes = this.store.favoritesDishes.pipe(
       map(ids => this.store.recipesSubject.getValue().filter(r => ids.includes(r.id)))
     );
   }
-  toggleFav(id:number){ this.store.toggleFavorite(id); }
+
+  toggleFav(id:number) { 
+    this.store.toggleFavorite(id); 
+  }
 }

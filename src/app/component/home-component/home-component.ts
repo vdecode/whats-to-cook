@@ -12,13 +12,13 @@ import { Recipe } from '../../models/recipe.model';
   styleUrl: './home-component.scss'
 })
 export class HomeComponent {
-  filtered$: Observable<Recipe[]>;
-  favorites$: Observable<number[]>;
+  filtered: Observable<Recipe[]>;
+  favorites: Observable<number[]>;
 
   constructor(public store: RecipeStore, private router: Router){
-    this.filtered$ = this.store.filtered$;
-    this.favorites$ = this.store.favorites$;
-    console.log(this.favorites$)
+    this.filtered = this.store.filteredRecipes;
+    this.favorites = this.store.favoritesDishes;
+    console.log(this.favorites)
   }
   
   onSearch(name: string) { 

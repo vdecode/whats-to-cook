@@ -17,11 +17,11 @@ export class ShoppingListComponent {
   }
 
   clear() { 
-    this.ingredients=[]; 
+   
   }
 
   export() { 
-    navigator.clipboard?.writeText(this.ingredients.join('\n')).then(()=>alert('Copied')) 
+     
   }
 
 }

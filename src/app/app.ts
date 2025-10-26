@@ -1,5 +1,5 @@
 import { Component, effect, signal } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,28 +8,27 @@ import { RouterModule, RouterOutlet } from '@angular/router';
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('whats-to-cook');
-   mode = signal<boolean>(false);
+  mode = signal<boolean>(false);
   constructor(){
     const raw = localStorage.getItem('dark_mode');
     console.log(raw, 'raw')
     this.mode.set(raw==='1');
     effect(()=>{
-      console.log('effect run')
-      const m = this.mode();
+      console.log('effect runs')
+      const mode = this.mode();
       const el = document.documentElement;
-      if(m) {
+      if(mode) {
         el.classList.add('dark');
         console.log('dark mode set');
        } else {
         el.classList.remove('dark');
         console.log('light mode set');
-        localStorage.setItem('dark_mode', m?'1':'0');
+        localStorage.setItem('dark_mode', mode ? '1': '0');
        } 
     });
   }
   toggle(){ 
-    this.mode.update(v=>!v); 
+    this.mode.update((v)=>!v); 
   }
   
 }

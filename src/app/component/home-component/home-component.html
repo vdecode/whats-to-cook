@@ -1,20 +1,20 @@
 <div class="page-wrapper">
     <div class="d-flex gap-2 align-items-center mb-3">
-        <input class="form-control" style="max-width:300px" placeholder="Search title/instruction" (input)="onSearch($any($event.target).value)" />
-        <input class="form-control" style="max-width:200px" placeholder="Ingredient" (input)="onIngredient($any($event.target).value)" />
-        <input class="form-control" style="max-width:200px" placeholder="Cuisine" (input)="onCuisine($any($event.target).value)" />
+        <input class="form-control" style="max-width:300px" placeholder="Search title/name" (input)="onSearch(($event.target).value)" />
+        <input class="form-control" style="max-width:200px" placeholder="Ingredient" (input)="onIngredient(($event.target).value)" />
+        <input class="form-control" style="max-width:200px" placeholder="Cuisine" (input)="onCuisine(($event.target).value)" />
         <a routerLink='/shopping' class="btn btn-secondary ms-auto">Shopping List</a>
         <a routerLink='/favorites' class="btn btn-outline-secondary">Favorites</a>
    </div>
 
    <div class="row g-3">
-    <div class="col-md-4" *ngFor="let r of filtered$ | async">
+    <div class="col-md-4" *ngFor="let r of filtered | async">
       <div class="recipe-card">
         <img [src]="r.images?.[0]" (click)="click(r.id)"/>
         <h5>{{ r.name }}</h5>
         <p><small>{{ r.cuisine }}</small></p>
         <button class="btn btn-sm btn-outline-primary" (click)="toggleFav(r.id)">
-          {{ (favorites$ | async)?.includes(r.id) ? 'Remove from Favorites' : 'Add to Favorites' }}
+          {{ (favorites | async)?.includes(r.id) ? 'Remove from Favorites' : 'Add to Favorites' }}
         </button>
       </div>
     </div>
