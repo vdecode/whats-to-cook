@@ -1,1 +1,11 @@
-<p>shopping-list-component works!</p>
+<div class="shoipping-wrapper">
+     <section>
+      <h2>Shopping List</h2>
+      <p *ngIf="ingredients?.length===0">No ingredients selected</p>
+      <ul><li *ngFor="let i of ingredients">{{ i }}</li></ul>
+      <div class="mt-3">
+        <button class="btn btn-sm btn-secondary" (click)="clear()">Clear</button>
+        <button class="btn btn-sm btn-outline-secondary" (click)="export()">Export (copy)</button>
+      </div>
+    </section>
+</div>
